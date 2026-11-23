@@ -1,6 +1,7 @@
 # Windows terminal dotfiles
 
-This repository contains the PowerShell profile used on my Windows machines.
+This repository contains the PowerShell profile and Windows Terminal appearance
+used on my Windows machines.
 
 ## Install on a new dev box
 
@@ -13,5 +14,8 @@ Set-Location .\win-dotfiles
 ```
 
 The installer copies the profile to the current PowerShell host's user profile
-path. If a profile already exists there, it is backed up before being replaced.
-Restart PowerShell to use the new prompt.
+path and applies the Catppuccin Frappe color scheme with the JetBrains Mono font
+as the Windows Terminal default appearance. Existing profile and Terminal
+settings are backed up before being changed. Terminal JSON comments and
+formatting may be normalized. Restart PowerShell and Windows Terminal to use
+the updated settings.
