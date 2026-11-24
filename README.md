@@ -1,6 +1,7 @@
 # Windows terminal dotfiles
 
-This repository contains my Windows PowerShell prompt and personal Copilot skills.
+This repository contains the PowerShell profile and Windows Terminal appearance
+used on my Windows machines.
 
 ## Install on a new dev box
 
@@ -13,9 +14,28 @@ Set-Location .\win-dotfiles
 ```
 
 The installer copies the profile to the current PowerShell host's user profile
-path. If a profile already exists there, it is backed up before being replaced.
-Restart PowerShell to use the new prompt.
+path and applies the Catppuccin Frappe color scheme with the JetBrains Mono font
+as the Windows Terminal default appearance. Existing profile and Terminal
+settings are backed up before being changed. Terminal JSON comments and
+formatting may be normalized. Restart PowerShell and Windows Terminal to use
+the updated settings.
 
-The installer also restores `ponytail` and `socratic-tutor` from pinned upstream
-revisions. Existing personal copies are left alone. Run `copilot skill list` to
-see them. Built-in and Agency-managed plugins are not part of these dotfiles.
+## Copilot skills and plugins
+
+`copilot-manifest.json` defines the Copilot marketplaces, plugins, personal skills,
+and skill directories provisioned on a dev box. Add new sources to that
+manifest, then run:
+
+```powershell
+.\Install-Copilot.ps1
+```
+
+The script registers missing marketplaces, installs missing plugins, enables
+the listed plugins, and merges skill directories into
+`~\.copilot\settings.json` without replacing other Copilot settings.
+It installs missing personal skills (`ponytail` and `socratic-tutor`) from
+pinned revisions without overwriting existing copies.
+
+`Install-Dotfiles.ps1` also runs `Install-Copilot.ps1`, so one dev-box
+bootstrap command provisions the terminal, Copilot plugins, marketplaces, and
+skill directories.
