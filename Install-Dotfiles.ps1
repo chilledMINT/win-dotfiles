@@ -25,3 +25,19 @@ if ($PSCmdlet.ShouldProcess($targetProfile, 'Install PowerShell profile')) {
     Copy-Item -LiteralPath $sourceProfile -Destination $targetProfile -Force
     Write-Output "Installed PowerShell profile to: $targetProfile"
 }
+
+$skills = [ordered]@{
+    'ponytail'       = 'https://raw.githubusercontent.com/DietrichGebert/ponytail/df9e89941d50419fd5bcf1de41e28097f1db49b2/skills/ponytail/SKILL.md'
+    'socratic-tutor' = 'https://raw.githubusercontent.com/janestreet/agent_skills/7c6715c29548a3b39d4a9545c698ee4fd17a7213/socratic-tutor/SKILL.md'
+}
+
+$copilotHome = if ($env:COPILOT_HOME) { $env:COPILOT_HOME } else { Join-Path $HOME '.copilot' }
+foreach ($name in $skills.Keys) {
+    if (Test-Path -LiteralPath (Join-Path $copilotHome "skills\$name\SKILL.md") -PathType Leaf) {
+        continue
+    }
+    if ($PSCmdlet.ShouldProcess($name, 'Install personal Copilot skill')) {
+        copilot skill add $skills[$name]
+        if ($LASTEXITCODE -ne 0) { throw "Failed to install Copilot skill: $name" }
+    }
+}
