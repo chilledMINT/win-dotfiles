@@ -163,3 +163,8 @@ if ($PSCmdlet.ShouldProcess($terminalSettingsPath, 'Apply Windows Terminal appea
     Write-Output "Backed up Windows Terminal settings to: $backupPath"
     Write-Output "Applied Windows Terminal appearance to: $terminalSettingsPath"
 }
+
+$copilotInstaller = Join-Path $PSScriptRoot 'Install-Copilot.ps1'
+if ($PSCmdlet.ShouldProcess($copilotInstaller, 'Install Copilot skills and plugins')) {
+    & $copilotInstaller
+}

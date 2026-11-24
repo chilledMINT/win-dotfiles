@@ -1,0 +1,12 @@
+{
+  "marketplaces": [
+    {
+      "name": "claude-code-plugins",
+      "source": "anthropics/claude-code"
+    }
+  ],
+  "plugins": [
+    "code-review@claude-code-plugins"
+  ],
+  "skillDirectories": []
+}
