@@ -5,7 +5,7 @@ used on my Windows machines.
 
 ## Install on a new dev box
 
-Install Git and PowerShell, then run:
+Install Git, PowerShell, and GitHub Copilot CLI (with `copilot skill add`), then run:
 
 ```powershell
 git clone https://github.com/chilledMINT/win-dotfiles.git
@@ -22,8 +22,8 @@ the updated settings.
 
 ## Copilot skills and plugins
 
-`copilot-manifest.json` defines the Copilot marketplaces, plugins, and skill
-directories provisioned on a dev box. Add new plugins or repositories to that
+`copilot-manifest.json` defines the Copilot marketplaces, plugins, personal skills,
+and skill directories provisioned on a dev box. Add new sources to that
 manifest, then run:
 
 ```powershell
@@ -33,6 +33,8 @@ manifest, then run:
 The script registers missing marketplaces, installs missing plugins, enables
 the listed plugins, and merges skill directories into
 `~\.copilot\settings.json` without replacing other Copilot settings.
+It installs missing personal skills (`ponytail` and `socratic-tutor`) from
+pinned revisions without overwriting existing copies.
 
 `Install-Dotfiles.ps1` also runs `Install-Copilot.ps1`, so one dev-box
 bootstrap command provisions the terminal, Copilot plugins, marketplaces, and

@@ -10,7 +10,7 @@ if (-not (Get-Command copilot -ErrorAction SilentlyContinue)) {
 }
 
 $manifest = Get-Content -LiteralPath $ManifestPath -Raw | ConvertFrom-Json
-$copilotDirectory = Join-Path $env:USERPROFILE '.copilot'
+$copilotDirectory = if ($env:COPILOT_HOME) { $env:COPILOT_HOME } else { Join-Path $env:USERPROFILE '.copilot' }
 $settingsPath = Join-Path $copilotDirectory 'settings.json'
 
 if (-not (Test-Path -LiteralPath $copilotDirectory -PathType Container)) {
@@ -96,6 +96,16 @@ foreach ($directory in @($manifest.skillDirectories)) {
     }
 }
 $settings.skillDirectories = $skillDirectories.ToArray()
+
+foreach ($skill in $manifest.personalSkills) {
+    if (Test-Path -LiteralPath (Join-Path $copilotDirectory "skills\$($skill.name)\SKILL.md") -PathType Leaf) {
+        continue
+    }
+    if ($PSCmdlet.ShouldProcess($skill.name, 'Install personal Copilot skill')) {
+        & copilot skill add $skill.source
+        if ($LASTEXITCODE -ne 0) { throw "Failed to install Copilot skill: $($skill.name)" }
+    }
+}
 
 if ($PSCmdlet.ShouldProcess($settingsPath, 'Update Copilot settings')) {
     $settings | ConvertTo-Json -Depth 20 |

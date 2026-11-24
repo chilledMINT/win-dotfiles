@@ -8,5 +8,15 @@
   "plugins": [
     "code-review@claude-code-plugins"
   ],
-  "skillDirectories": []
+  "skillDirectories": [],
+  "personalSkills": [
+    {
+      "name": "ponytail",
+      "source": "https://raw.githubusercontent.com/DietrichGebert/ponytail/df9e89941d50419fd5bcf1de41e28097f1db49b2/skills/ponytail/SKILL.md"
+    },
+    {
+      "name": "socratic-tutor",
+      "source": "https://raw.githubusercontent.com/janestreet/agent_skills/7c6715c29548a3b39d4a9545c698ee4fd17a7213/socratic-tutor/SKILL.md"
+    }
+  ]
 }
